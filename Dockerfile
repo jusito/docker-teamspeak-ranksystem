@@ -1,12 +1,11 @@
-FROM php:5.6.37-apache
-#7.2.9 tested, not working
+FROM php:7.2.9-apache
+
 EXPOSE 80/tcp
 
-
-#needed: PDO, php, cURL, Zip, SSH2
-#SSH2 needed to compile, see comentary: http://php.net/manual/de/ssh2.installation.php
+#/usr/local/etc/php/php.ini not existing default
+#http://pecl.php.net/package/ssh2
 RUN cd /tmp && \
-	curl -L -o 'archive' 'https://github.com/Newcomer1989/TSN-Ranksystem/archive/1.2.10.tar.gz' && \
+	curl -L -o 'archive' 'https://codeload.github.com/Newcomer1989/TSN-Ranksystem/tar.gz/7e1c24a1efb084b6a7596ba61970c5c00b51cec6' && \
 	tar -xf 'archive' && \
 	cd * && \
 	mkdir -p '/var/www/html/ranksystem' && \
@@ -15,16 +14,17 @@ RUN cd /tmp && \
 	cd .. && \
 	rm -rf * && \
 	\
-	chmod -R ugo=rwx '/var/www/html/ranksystem/'
+	chmod -R ugo=rwx '/var/www/html/ranksystem/' 
 	
 #chmod -R ugo=rwx '/var/www/html/ranksystem/update' && \
 #chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
 #chmod -R ugo=rwx '/var/www/html/ranksystem/tsicons' && \
 #chmod -R ugo=rwx '/var/www/html/ranksystem/avatars'
 	
-#libcurl3 libcurl3-dev
 RUN apt-get update -y && \
-	apt-get install -y zlib1g-dev libcurl3-dev && \
+	apt-get install -y zlib1g-dev libcurl3-dev libssh2-1-dev && \
+	\
+	pecl install ssh2-1.1.2 && \
 	\
 	docker-php-ext-install curl && \
 	docker-php-ext-install zip && \
@@ -34,4 +34,5 @@ RUN apt-get update -y && \
 	docker-php-ext-enable curl && \
 	docker-php-ext-enable zip && \
 	docker-php-ext-enable pdo && \
-	docker-php-ext-enable pdo_mysql
+	docker-php-ext-enable pdo_mysql && \
+	docker-php-ext-enable ssh2
