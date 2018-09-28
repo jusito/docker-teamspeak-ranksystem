@@ -5,7 +5,7 @@ EXPOSE 80/tcp
 #/usr/local/etc/php/php.ini not existing default
 #http://pecl.php.net/package/ssh2
 RUN cd /tmp && \
-	curl -L -o 'archive' 'https://codeload.github.com/Newcomer1989/TSN-Ranksystem/tar.gz/7e1c24a1efb084b6a7596ba61970c5c00b51cec6' && \
+	curl -L -o 'archive' 'https://github.com/Newcomer1989/TSN-Ranksystem/archive/1.2.11.tar.gz' && \
 	tar -xf 'archive' && \
 	cd * && \
 	mkdir -p '/var/www/html/ranksystem' && \
