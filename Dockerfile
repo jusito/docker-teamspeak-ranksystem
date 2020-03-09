@@ -5,16 +5,16 @@ EXPOSE 80/tcp
 #/usr/local/etc/php/php.ini not existing default
 #http://pecl.php.net/package/ssh2
 RUN cd /tmp && \
-	curl -L -o 'archive' 'https://github.com/Newcomer1989/TSN-Ranksystem/archive/1.2.11.tar.gz' && \
-	tar -xf 'archive' && \
-	cd * && \
-	mkdir -p '/var/www/html/ranksystem' && \
-	mv * '/var/www/html/ranksystem' && \
-	chown -R 'www-data:www-data' '/var/www/html/ranksystem' && \
-	cd .. && \
-	rm -rf * && \
-	\
-	chmod -R ugo=rwx '/var/www/html/ranksystem/' 
+	curl -L https://github.com/Newcomer1989/TSN-Ranksystem/tarball/master > archive && \
+        tar -xf 'archive' && \
+        cd */ && \
+        mkdir -p '/var/www/html/ranksystem' && \
+        mv * '/var/www/html/ranksystem' && \
+        chown -R 'www-data:www-data' '/var/www/html/ranksystem' && \
+        cd .. && \
+        rm -rf */ && \
+        \
+        chmod -R ugo=rwx '/var/www/html/ranksystem/'
 	
 #chmod -R ugo=rwx '/var/www/html/ranksystem/update' && \
 #chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
