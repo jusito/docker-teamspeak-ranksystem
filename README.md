@@ -1,10 +1,26 @@
 # docker-teamspeak-ranksystem
 WIP image for https://ts-n.net/ranksystem.php
 
-# run a new database
-docker run -d --network="bridge" --name "RanksystemDatabase" -v RanksystemDatabase:/var/lib/mysql -e MYSQL_ROOT_PASSWORD="MySecurePassword" mariadb:10.3
+# updates of this fork
 
-docker run -d --network="bridge" --name "Teamspeak_Ranksystem" jusito/docker-teamspeak-ranksystem:develop
+In comparison to the original repo, I have only modified some minor things.
+I changed the link to the TSN Rank System in the Dockerfile so that it always points to the most current version.
+
+I also updated to the latest php version and updated some modules.
+
+A note for all who want to use my docker files: I am a Linux and Docker beginner. Most of what i changed happened by "trial and error". Please be aware of that.
+
+# run a new database
+
+Just download a mariadb image from dockerhub and start it with the following command:
+
+docker run -d --network="bridge" --name "RanksystemDatabase" -v RanksystemDatabase:/var/lib/mysql -e MYSQL_ROOT_PASSWORD="MySecurePassword" mariadb:latest
+
+To start the docker container that you've created with my dockerfile:
+
+docker run -d --network="bridge" --name "Teamspeak_Ranksystem" tsn-docker:latest
+
+Add -p 8765:80 to change the Port from 80 to 8765 since port 80 is in use on most servers.
 
 # how to get the ip of mariadb?
 docker inspect "RanksystemDatabase"
