@@ -17,17 +17,15 @@ I am a Linux and Docker beginner. Most of what i changed happened by "trial and 
 
 Just download a mariadb image from dockerhub and start it with the following command:
 
-docker run -d --network="bridge" --name "RanksystemDatabase" -v RanksystemDatabase:/var/lib/mysql -e MYSQL_ROOT_PASSWORD="MySecurePassword" mariadb:latest
+docker run -d --name "RanksystemDatabase" --network="bridge" -v /my/own/datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD="my-secret-pw" mariadb:latest
+
+The -v /my/own/datadir:/var/lib/mysql part of the command mounts the /my/own/datadir directory from the underlying host system as /var/lib/mysql inside the container, where MySQL by default will write its data files.
 
 To start the docker container that you've created with my dockerfile:
 
 docker run -d --network="bridge" --name "Teamspeak_Ranksystem" tsn-docker:latest
 
 Add -p 8765:80 to change the Port from 80 to 8765 since port 80 is in use on most servers.
-
-I would also add the -v Flag to store the database-data outside of the Docker container.
-
-The -v /my/own/datadir:/var/lib/mysql part of the command mounts the /my/own/datadir directory from the underlying host system as /var/lib/mysql inside the container, where MySQL by default will write its data files.
 
 # link on dockerhub
 
