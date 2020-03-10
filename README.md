@@ -3,12 +3,15 @@ WIP image for https://ts-n.net/ranksystem.php
 
 # updates of this fork
 
-In comparison to the original repo, I have only modified some minor things.
-I changed the link to the TSN Rank System in the Dockerfile so that it always points to the most current version.
+In comparison to the original repo, I have only modified a few minor things.
+I changed the link to the TSN Rank System in the Dockerfile so that it will always point to the latest version.
 
 I also updated to the latest php version and updated some modules.
 
-A note for all who want to use my docker files: I am a Linux and Docker beginner. Most of what i changed happened by "trial and error". Please be aware of that.
+I also updated the permissions because they were too broad and imprecise.
+
+A note to all who want to use this repo:
+I am a Linux and Docker beginner. Most of what i changed happened by "trial and error". Please be aware of that.
 
 # run a new database
 
