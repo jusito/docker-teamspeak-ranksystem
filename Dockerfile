@@ -2,9 +2,6 @@ FROM php:7.4.3-apache
 
 EXPOSE 80/tcp
 
-#/usr/local/etc/php/php.ini not existing default
-#http://pecl.php.net/package/ssh2
-
 RUN cd /tmp && \
         curl -L https://github.com/Newcomer1989/TSN-Ranksystem/tarball/master > archive && \
         tar -xf 'archive' && \
