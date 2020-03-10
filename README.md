@@ -25,6 +25,10 @@ docker run -d --network="bridge" --name "Teamspeak_Ranksystem" tsn-docker:latest
 
 Add -p 8765:80 to change the Port from 80 to 8765 since port 80 is in use on most servers.
 
+I would also add the -v Flag to store the database-data outside of the Docker container.
+
+The -v /my/own/datadir:/var/lib/mysql part of the command mounts the /my/own/datadir directory from the underlying host system as /var/lib/mysql inside the container, where MySQL by default will write its data files.
+
 # link on dockerhub
 
 If you'd like to download the image:
