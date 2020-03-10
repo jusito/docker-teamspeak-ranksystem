@@ -19,7 +19,7 @@ Just download a mariadb image from dockerhub and start it with the following com
 
 ```docker run -d --name "RanksystemDatabase" --network="bridge" -v /my/own/datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD="my-secret-pw" mariadb:latest``` 
 
-The ``` -v /my/own/datadir:/var/lib/mysql```  part of the command mounts the /my/own/datadir directory from the underlying host system as /var/lib/mysql inside the container, where MySQL by default will write its data files.
+The ``` -v /my/own/datadir:/var/lib/mysql```  part of the command mounts the ```/my/own/datadir``` directory from the underlying host system as /var/lib/mysql inside the container, where MySQL by default will write its data files.
 
 To start the docker container that you've created with my dockerfile:
 
