@@ -15,12 +15,11 @@ RUN cd /tmp && \
         cd .. && \
         rm -rf */ && \
         \
-        chmod -R ugo=rwx '/var/www/html/ranksystem/'
-
-#chmod -R ugo=rwx '/var/www/html/ranksystem/update' && \
-#chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
-#chmod -R ugo=rwx '/var/www/html/ranksystem/tsicons' && \
-#chmod -R ugo=rwx '/var/www/html/ranksystem/avatars'
+        chmod -R ugo=rwx '/var/www/html/ranksystem/update' && \
+	chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
+	chmod -R ugo=rwx '/var/www/html/ranksystem/tsicons' && \
+	chmod -R ugo=rwx '/var/www/html/ranksystem/avatars' && \
+	chmod ugo=rwx '/var/www/html/ranksystem/other/dbconfig.php'
 
 RUN apt-get update -y && \
         apt-get install -y libcurl3-dev libzip-dev libssh2-1-dev libonig-dev && \
