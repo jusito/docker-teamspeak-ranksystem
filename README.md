@@ -23,7 +23,7 @@ The ``` -v /my/own/datadir:/var/lib/mysql```  part of the command mounts the ```
 
 To start the docker container that you've created with my dockerfile:
 
-``` docker run -d --network="bridge" --name "Teamspeak_Ranksystem" tsn-docker:latest``` 
+``` docker run -d --network="bridge" --name "Teamspeak_Ranksystem" kourgiantakis/docker-teamspeak-ranksystem:latest``` 
 
 Add ```-p 8765:80```  to change the Port from 80 to 8765 since port 80 is in use on most servers.
 
