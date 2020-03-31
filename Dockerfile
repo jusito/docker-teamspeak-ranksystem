@@ -13,10 +13,13 @@ RUN cd /tmp && \
         rm -rf */ && \
         \
         chmod -R ugo=rwx '/var/www/html/ranksystem/update' && \
-	chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
-	chmod -R ugo=rwx '/var/www/html/ranksystem/tsicons' && \
-	chmod -R ugo=rwx '/var/www/html/ranksystem/avatars' && \
-	chmod ugo=rwx '/var/www/html/ranksystem/other/dbconfig.php'
+        chmod -R ugo=rwx '/var/www/html/ranksystem/logs' && \
+        chmod -R ugo=rwx '/var/www/html/ranksystem/tsicons' && \
+        chmod -R ugo=rwx '/var/www/html/ranksystem/avatars' && \
+        chmod ugo=rwx '/var/www/html/ranksystem/other/dbconfig.php'
+
+# Change the default root of apache
+RUN sed -i ' s/\<var\/www\/html\>/&\/ranksystem/' /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update -y && \
         apt-get install -y libcurl3-dev libzip-dev libssh2-1-dev libonig-dev && \
@@ -35,3 +38,19 @@ RUN apt-get update -y && \
         docker-php-ext-enable pdo_mysql && \
         docker-php-ext-enable ssh2 && \
         docker-php-ext-enable mbstring
+
+# Install cron
+
+RUN apt-get update && apt-get install -y \
+    cron \
+    sudo \
+    nano
+
+# Create the log file to be able to run tail
+#  RUN touch /var/log/cron.log
+
+# Setup cron job
+RUN (crontab -l ; echo "*/10 * * * * sudo -u www-data php /var/www/html/worker.php check >/dev/null 2>&1") | crontab
+
+# Run the command on container startup
+# CMD cron && tail -f /var/log/cron.log
