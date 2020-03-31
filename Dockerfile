@@ -38,19 +38,3 @@ RUN apt-get update -y && \
         docker-php-ext-enable pdo_mysql && \
         docker-php-ext-enable ssh2 && \
         docker-php-ext-enable mbstring
-
-# Install cron
-
-RUN apt-get update && apt-get install -y \
-    cron \
-    sudo \
-    nano
-
-# Create the log file to be able to run tail
-#  RUN touch /var/log/cron.log
-
-# Setup cron job
-RUN (crontab -l ; echo "*/10 * * * * sudo -u www-data php /var/www/html/worker.php check >/dev/null 2>&1") | crontab
-
-# Run the command on container startup
-# CMD cron && tail -f /var/log/cron.log
