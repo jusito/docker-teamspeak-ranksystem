@@ -32,4 +32,4 @@ If you'd like to download the image:
 https://hub.docker.com/r/kourgiantakis/docker-teamspeak-ranksystem
 
 # how to get the ip of mariadb?
-docker inspect "RanksystemDatabase"
+docker inspect "RanksystemDatabase" or just use "ranksystemdb.docker.local"
