@@ -1,7 +1,7 @@
 # docker-teamspeak-ranksystem
 WIP image for https://ts-n.net/ranksystem.php
 
-# Important
+# important
 
 A note to all who want to use this repo:
 I am a beginner. Most of what i wrote happened by "trial and error". Please be aware of that.
@@ -22,7 +22,7 @@ To start the docker container that you've created with my dockerfile:
 
 Add ```-p 8765:80```  to change the Port from 80 to 8765 or whatever you like.
 
-# Webroot
+# webroot
 I changed apaches webroot to /ranksystem.
 
 # link on dockerhub
@@ -33,3 +33,17 @@ https://hub.docker.com/r/kourgiantakis/docker-teamspeak-ranksystem
 
 # how to get the ip of mariadb?
 docker inspect "RanksystemDatabase" or just use "ranksystemdb.docker.local"
+
+# docker-compose
+
+I created a docker-compose that fits my personal needs.
+It creates the following combination of containers:
+
+- Teamspeak3
+- Sinusbot
+- Database (for the Ranksystem)
+- Ranksystem
+
+It puts them all into the same network and assigns hostnames.
+The volume for the persistance is always in /srv/
+The only exception is the dboconfig of the ranksystem.
