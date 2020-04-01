@@ -1,0 +1,68 @@
+version: '3.1'
+
+services:
+  teamspeak:
+    image: teamspeak
+    container_name: teamspeak_teamspeak3
+    restart: always
+    ports:
+      - 9987:9987/udp
+      - 10011:10011
+      - 30033:30033
+    volumes:
+      - /srv/ts3-data:/var/ts3server/
+    environment:
+      TS3SERVER_LICENSE: accept
+
+    networks:
+      teamspeak-network:
+        aliases:
+          - teamspeak.docker.local
+
+  sinusbot:
+    image: sinusbot/docker
+    container_name: teamspeak_sinusbot
+    restart: always
+    ports:
+      - 8087:8087
+    volumes:
+      - /srv/sinusbot/scripts:/opt/sinusbot/scripts
+      - /srv/sinusbot/data:/opt/sinusbot/data
+    environment:
+      UID: 1002
+      GID: 1002
+    networks:
+      teamspeak-network:
+
+  mariadb:
+    image: bitnami/mariadb:10.3
+    container_name: teamspeak_ranksystem-database
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - /srv/mariadb_ranksystem:/bitnami/mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=XGapXdm7tyWuIo
+      - MYSQL_DATABASE=RanksystemDatabase
+    networks:
+      teamspeak-network:
+        aliases:
+          - ranksystemdb.docker.local
+
+  ranksystem:
+    image: kourgiantakis/docker-teamspeak-ranksystem
+    container_name: teamspeak_ranksystem
+    restart: always
+    ports:
+      - 8088:80
+    volumes:
+      - ./dbconfig.php:/var/www/html/ranksystem/other/dbconfig.php
+    depends_on:
+      - mariadb
+    networks:
+      teamspeak-network:
+
+networks:
+    teamspeak-network:
+        driver: bridge
