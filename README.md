@@ -39,11 +39,11 @@ docker run -d \
 ```
 docker run -d \
  --name "Teamspeak_Ranksystem" \
- -p 10000:80  \
+ -p 8080:80  \
  --network="bridge" \
  --restart=unless-stopped \
  -v Teamspeak_Ranksystem \
- dev
+ jusito/docker-teamspeak-ranksystem
 ```
 
 ## follow ranksystem installation
