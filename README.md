@@ -16,8 +16,7 @@ docker run -d --name "Teamspeak" \
 ## Prepare a mysql container
 1. Choose mysql container name `--name "Teamspeak_Ranksystem_Database"`
 2. Choose a secure root password `-e MYSQL_ROOT_PASSWORD="MySecurePassword"`
-3. Choose hostname under which the database is locally accessible `--hostname "ranksystemdb.docker.local"`
-4. Fill in your selected details and run the following to start a database.
+3. Fill in your selected details and run the following to start a database.
 
 ```
 docker run -d \
@@ -64,3 +63,4 @@ docker run -d \
 - Healthcheck, reachable + connection to ts3 working + x, any status information of ranksystem?
 - permissions ?
 - Debug mode over env for apache / php / ranksystem / scripts / ...
+- hostname for container, didn't worked for me
