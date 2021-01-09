@@ -51,7 +51,7 @@ services:
           - ranksystemdb.docker.local
 
   ranksystem:
-    image: kourgiantakis/docker-teamspeak-ranksystem
+    image: jusito/docker-teamspeak-ranksystem
     container_name: teamspeak_ranksystem
     restart: always
     ports:
